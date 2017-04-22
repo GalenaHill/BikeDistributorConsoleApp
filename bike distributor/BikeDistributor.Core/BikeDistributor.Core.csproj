@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\AppSettings.cs" />
+    <Compile Include="Utilities\AppSettings.cs" />
     <Compile Include="Contracts\IAppSettings.cs" />
     <Compile Include="Contracts\IAssembliesProvider.cs" />
     <Compile Include="Contracts\IRecieptGenerator.cs" />

@@ -1,8 +1,9 @@
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Configuration;
+using BikeDistributor.Core.Contracts;
 
-namespace BikeDistributor.Core.Contracts
+namespace BikeDistributor.Core.Utilities
 {
     public class AppSettings : IAppSettings
     {
