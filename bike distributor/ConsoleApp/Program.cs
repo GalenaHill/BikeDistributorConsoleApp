@@ -1,4 +1,6 @@
-﻿namespace ConsoleApp
+﻿using BikeDistributor.Core.Contracts;
+
+namespace ConsoleApp
 {
     using System;
     using System.Linq;
@@ -14,7 +16,7 @@
         {
             #region initialize mock order
             string company = "Go Fast Company";
-            var bike1 = new Bike("OG-Rider", "OG-451", 455.99M, 120);
+            var bike1 = new Bike("OG-Rider", "OG-451", 455.99M, 35);
             var line1 = new Line(bike1, 1000);
             var order = new Order(company);
             order.AddLine(line1);
@@ -25,11 +27,11 @@
 
             var container = _createContainer();
 
-            var generator = container.Resolve<RecieptGenerator>();
+            var orderManager = container.Resolve<OrderManager>();
 
             Console.WriteLine(
-                generator.GenerateReciept(order, ReceiptType.Plain));
-
+                orderManager.GetReceipt(
+                    orderManager.CalcualteOrder(order), ReceiptType.Plain));
         }
 
         private static IContainer _createContainer()
