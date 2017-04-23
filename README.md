@@ -23,6 +23,6 @@ b.  At the order aggregate (sub-total) level;
 
 Consequently, at order computation time, an **IDiscountProvider** implementation is charged with &quot;scanning&quot; and retrieving the appropriate discount at both levels described above.
 
-As refactored, discount issuance logic of the **IDiscountProvider** implementation accommodates for a variety of discount settings which can be configured (set) at _both_ the management (business) level and at the sales level without the need to provide additional logic (code).
+As refactored, discount issuance logic of the **IDiscountProvider** implementation accommodates for a variety of discount settings which can be configured (set) at _both_ the management level and at the sales level without the need to recompile / redeploy.
 
 Thanks for looking!
