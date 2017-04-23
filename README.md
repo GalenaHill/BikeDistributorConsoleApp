@@ -1,10 +1,10 @@
 **Summary**
 
-As shipped, the refactored solution is now enabled to addresses the following:
+As shipped, the refactored solution is now enabled to address the following:
 
-1.  Order processing for not just bikes, but also any other inventory item;
+1.  Order processing (dynamic calculation and reciept issuance) for not just bikes, but also any other inventory item;
 
-2.  Dynamic order calculation - The most dynamic process in the entire solution is the order calculation.  It is subject to a variety of main drivers:
+2.  Order calculation - The most dynamic process in the entire solution is the order calculation.  It is subject to a variety of main drivers:
 
         a.  varying number of lines;
         b.  varying price and quantity per line;
