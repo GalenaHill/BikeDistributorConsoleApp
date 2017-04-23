@@ -51,10 +51,8 @@
     <Compile Include="Utilities\AppSettings.cs" />
     <Compile Include="Contracts\IAppSettings.cs" />
     <Compile Include="Contracts\IAssembliesProvider.cs" />
-    <Compile Include="Contracts\IRecieptGenerator.cs" />
     <Compile Include="ExtensionMethods\AppSettingsExtensions.cs" />
     <Compile Include="ExtensionMethods\DecimalExtensions.cs" />
-    <Compile Include="Functions\RecieptGenerator.cs" />
     <Compile Include="Enums\ReceiptTypeEnum.cs" />
     <Compile Include="ExtensionMethods\ContainerBuilderExtensions.cs" />
     <Compile Include="ServiceRegistrations.cs" />

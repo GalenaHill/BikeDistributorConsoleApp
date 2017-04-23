@@ -27,8 +27,6 @@
 
             builder.Register<DiscountProvider>();
 
-            builder.Register<RecieptGenerator>();
-
             builder.Register<OrderManager>();
         }
     }
