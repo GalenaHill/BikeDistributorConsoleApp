@@ -33,7 +33,7 @@ Where the domain model composition is to remain intact (order has lines, line ha
 	c.  quantity of bikes in inventory;
 	d.  bike purchase price;
 
-	2.  At the order aggregate (sub-total) level driven by variables such as:
+2.  At the order aggregate (sub-total) level driven by variables such as:
 	a.  Gross sale volume discount;
 	b.  Preferred customer discount;
 	c.  Other – discretionary discount.
