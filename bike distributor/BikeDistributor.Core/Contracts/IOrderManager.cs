@@ -1,8 +1,8 @@
-using BikeDistributor.Core.DomainObjects;
-using BikeDistributor.Core.Enums;
-
 namespace BikeDistributor.Core.Contracts
 {
+    using DomainObjects;
+    using Enums;
+
     public interface IOrderManager
     {
         Order CalcualteOrder(Order incomingOrder);

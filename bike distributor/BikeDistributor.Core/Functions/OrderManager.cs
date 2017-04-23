@@ -2,10 +2,10 @@ namespace BikeDistributor.Core.Functions
 {
     using System;
     using System.Text;
-    using BikeDistributor.Core.Contracts;
-    using BikeDistributor.Core.DomainObjects;
-    using BikeDistributor.Core.Enums;
-    using BikeDistributor.Core.ExtensionMethods;
+    using Contracts;
+    using DomainObjects;
+    using Enums;
+    using ExtensionMethods;
 
     public class OrderManager : IOrderManager
     {
@@ -17,9 +17,9 @@ namespace BikeDistributor.Core.Functions
                 throw new ArgumentNullException(nameof(appSettings));
             }
 
-            this._taxRate = appSettings.Get<decimal>("taxRate");
+            _taxRate = appSettings.Get<decimal>("taxRate");
 
-            this._discountProvider = discountProvider;
+            _discountProvider = discountProvider;
         }
 
         private readonly decimal _taxRate;
@@ -35,7 +35,7 @@ namespace BikeDistributor.Core.Functions
             {
                 line.TotalBeforeDiscount = line.Bike.Price * line.Quantity;
 
-                line.DiscountCoefficient = this._discountProvider
+                line.DiscountCoefficient = _discountProvider
                     .IssueAgingDiscount(line.Bike.DaysInInventory);
 
                 line.DiscountAmount =
@@ -48,7 +48,7 @@ namespace BikeDistributor.Core.Functions
 
             //rest
             incomingOrder.DiscountCoefficient =
-                this._discountProvider.IssueVolumeDiscount(incomingOrder.Subtotal);
+                _discountProvider.IssueVolumeDiscount(incomingOrder.Subtotal);
 
             incomingOrder.DiscountAmount =
                 incomingOrder.DiscountCoefficient * incomingOrder.Subtotal;
@@ -56,10 +56,10 @@ namespace BikeDistributor.Core.Functions
             incomingOrder.SubTotalNetDiscount =
                 incomingOrder.Subtotal - incomingOrder.DiscountAmount;
 
-            incomingOrder.TaxCoefficient = this._taxRate;
+            incomingOrder.TaxCoefficient = _taxRate;
 
             incomingOrder.TaxAmount =
-                incomingOrder.SubTotalNetDiscount * this._taxRate;
+                incomingOrder.SubTotalNetDiscount * _taxRate;
 
             incomingOrder.Total =
                 incomingOrder.SubTotalNetDiscount + incomingOrder.TaxAmount;
@@ -118,7 +118,7 @@ namespace BikeDistributor.Core.Functions
 
         private string _getHtml(Order order)
         {
-            throw new System.NotImplementedException(
+            throw new NotImplementedException(
                 "Same thing here other than the html markup string - " +
                 "going to skip this for now...");
         }

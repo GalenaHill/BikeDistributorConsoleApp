@@ -1,7 +1,9 @@
 namespace BikeDistributor.Core.Utilities
 {
     using System.Collections.Generic;
-    using BikeDistributor.Core.Contracts;
+    using Contracts;
+
+    // completely separate layer in real life
 
     public class MockDiscountRepository : IMockDiscountRepository
     {

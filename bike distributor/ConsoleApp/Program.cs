@@ -1,6 +1,4 @@
-﻿using BikeDistributor.Core.Contracts;
-
-namespace ConsoleApp
+﻿namespace ConsoleApp
 {
     using System;
     using System.Linq;

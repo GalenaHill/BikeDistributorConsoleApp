@@ -2,13 +2,11 @@
 {
     using System;
     using Autofac;
-    using Autofac.Features.Scanning;
-    using BikeDistributor.Core.Contracts;
-    using BikeDistributor.Core.ExtensionMethods;
-    using BikeDistributor.Core.Functions;
-    using BikeDistributor.Core.Utilities;
+    using ExtensionMethods;
+    using Functions;
+    using Utilities;
 
-    public class ServiceRegistrations : Autofac.Module
+    public class ServiceRegistrations : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

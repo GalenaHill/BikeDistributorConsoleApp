@@ -3,13 +3,13 @@ namespace BikeDistributor.Core.Functions
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using BikeDistributor.Core.Contracts;
+    using Contracts;
 
     public class DiscountProvider : IDiscountProvider
     {
         public DiscountProvider(IMockDiscountRepository discountRepository)
         {
-            this._discountRepository = discountRepository;
+            _discountRepository = discountRepository;
         }
 
         private readonly IMockDiscountRepository _discountRepository;
@@ -18,7 +18,7 @@ namespace BikeDistributor.Core.Functions
         {
 
             IDictionary<int, decimal> ageAmountDiscountPairs =
-                this._discountRepository.GetAgeAmountDiscountPairs();
+                _discountRepository.GetAgeAmountDiscountPairs();
 
             if (ageAmountDiscountPairs == null)
             {
@@ -53,7 +53,7 @@ namespace BikeDistributor.Core.Functions
         public decimal IssueVolumeDiscount(decimal grossSale)
         {
             IDictionary<decimal, decimal> grossSaleDiscountPairs =
-                this._discountRepository.GetGrossSaleDiscountPairs();
+                _discountRepository.GetGrossSaleDiscountPairs();
 
             if (grossSaleDiscountPairs == null)
             {

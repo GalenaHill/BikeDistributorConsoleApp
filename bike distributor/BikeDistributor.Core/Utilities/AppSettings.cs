@@ -1,24 +1,24 @@
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Configuration;
-using BikeDistributor.Core.Contracts;
-
 namespace BikeDistributor.Core.Utilities
 {
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
+    using Contracts;
+
     public class AppSettings : IAppSettings
     {
         private readonly NameValueCollection storage;
 
         public AppSettings()
         {
-            this.storage = ConfigurationManager.AppSettings;
+            storage = ConfigurationManager.AppSettings;
         }
 
         public static IAppSettings Instance { get; } = new AppSettings();
 
         public T Get<T>(string key, T defaultValue)
         {
-            var value = this.storage[key];
+            var value = storage[key];
 
             if (string.IsNullOrWhiteSpace(value))
             {

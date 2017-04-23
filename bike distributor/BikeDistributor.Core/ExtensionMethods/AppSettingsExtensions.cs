@@ -2,7 +2,7 @@ namespace BikeDistributor.Core.ExtensionMethods
 {
     using System;
     using System.Diagnostics;
-    using BikeDistributor.Core.Contracts;
+    using Contracts;
 
     public static class AppSettingsExtensions
     {
