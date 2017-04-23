@@ -9,7 +9,7 @@ namespace BikeDistributor.Core.Functions
     {
         public DiscountProvider(IMockDiscountRepository discountRepository)
         {
-            _discountRepository = discountRepository;
+            this._discountRepository = discountRepository;
         }
 
         private readonly IMockDiscountRepository _discountRepository;
@@ -18,7 +18,7 @@ namespace BikeDistributor.Core.Functions
         {
 
             IDictionary<int, decimal> ageAmountDiscountPairs =
-                _discountRepository.GetAgeAmountDiscountPairs();
+                this._discountRepository.GetAgeAmountDiscountPairs();
 
             if (ageAmountDiscountPairs == null)
             {
@@ -53,7 +53,7 @@ namespace BikeDistributor.Core.Functions
         public decimal IssueVolumeDiscount(decimal grossSale)
         {
             IDictionary<decimal, decimal> grossSaleDiscountPairs =
-                _discountRepository.GetGrossSaleDiscountPairs();
+                this._discountRepository.GetGrossSaleDiscountPairs();
 
             if (grossSaleDiscountPairs == null)
             {

@@ -17,9 +17,9 @@ namespace BikeDistributor.Core.Functions
                 throw new ArgumentNullException(nameof(appSettings));
             }
 
-            _taxRate = appSettings.Get<decimal>("taxRate");
+            this._taxRate = appSettings.Get<decimal>("taxRate");
 
-            _discountProvider = discountProvider;
+            this._discountProvider = discountProvider;
         }
 
         private readonly decimal _taxRate;
@@ -35,7 +35,7 @@ namespace BikeDistributor.Core.Functions
             {
                 line.TotalBeforeDiscount = line.Bike.Price * line.Quantity;
 
-                line.DiscountCoefficient = _discountProvider
+                line.DiscountCoefficient = this._discountProvider
                     .IssueAgingDiscount(line.Bike.DaysInInventory);
 
                 line.DiscountAmount =
@@ -48,7 +48,7 @@ namespace BikeDistributor.Core.Functions
 
             //rest
             incomingOrder.DiscountCoefficient =
-                _discountProvider.IssueVolumeDiscount(incomingOrder.Subtotal);
+                this._discountProvider.IssueVolumeDiscount(incomingOrder.Subtotal);
 
             incomingOrder.DiscountAmount =
                 incomingOrder.DiscountCoefficient * incomingOrder.Subtotal;
@@ -56,10 +56,10 @@ namespace BikeDistributor.Core.Functions
             incomingOrder.SubTotalNetDiscount =
                 incomingOrder.Subtotal - incomingOrder.DiscountAmount;
 
-            incomingOrder.TaxCoefficient = _taxRate;
+            incomingOrder.TaxCoefficient = this._taxRate;
 
             incomingOrder.TaxAmount =
-                incomingOrder.SubTotalNetDiscount * _taxRate;
+                incomingOrder.SubTotalNetDiscount * this._taxRate;
 
             incomingOrder.Total =
                 incomingOrder.SubTotalNetDiscount + incomingOrder.TaxAmount;

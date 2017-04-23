@@ -33,7 +33,7 @@ Where the domain model composition is to remain intact (order has lines, line ha
 	b.  Preferred customer discount;
 	c.  Other – discretionary discount.
     
-Consequently, at order computation time, the IDiscountProvider implementation must examine each order at both levels described above.  At the moment, discount issuance logic is limited to accommodate 1.a and 2.a above.  In a real-world implementation, the IDiscountProvider implementations can be refactored to accommodate all of the above and more.
+Consequently, at order computation time, the IDiscountProvider implementation must examine each order at both levels described above.  At the moment, discount issuance logic is limited to accommodate 1.a and 2.a above.  In a real-world scenario, the IDiscountProvider implementations can be refactored to accommodate all of the above and more.  Currently, the DiscountProvider object obtains discount tier settings from the injected implementaiotn of the IMockDiscountRepository and dynamically issues discounts based on persistant (internal, management) discount tier settings.  
 
 Additional
 
