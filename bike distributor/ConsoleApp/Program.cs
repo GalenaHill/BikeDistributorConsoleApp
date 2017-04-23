@@ -15,28 +15,32 @@
             #region initialize mock order
 
             var bike1 = new Bike(
-                "OG-Rider", 
-                "OG-451", 
-                455.99M, 
-                35, 
-                "ENTER CODE HERE");
+                "OG-Rider",
+                "OG-451",
+                455.99M,
+                35,
+                "ABC-123");
 
             var line1 = new LineItem(bike1, 1000);
 
             var bike2 = new Bike(
-                "Slow-Rider", 
-                "OG-451.2", 
-                121.99M, 10, 
-                "ENTER CODE HERE");
+                "Slow-Rider",
+                "OG-451.2",
+                121.99M, 10,
+                "FGH-789");
 
             var line2 = new LineItem(bike2, 500);
 
-            var order = new Order(new CustomerSalesInfo()
+            var order = new Order(
+                new CustomerSalesInfo()
+                {
+                    CustomerId = "GoFastCustomerId",
+                    CustomerName = "GoFastCustomer",
+                    DiscountCode = "CCC"
+                })
             {
-                CustomerId = "GoFastCustomerId",
-                CustomerName = "GoFastCustomer",
-                DiscountCode = "CCC"
-            });
+                ManualDiscountCoefficient = .05M
+            };
 
             order.AddLine(line1);
 

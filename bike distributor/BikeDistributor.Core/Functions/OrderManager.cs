@@ -94,7 +94,7 @@ namespace BikeDistributor.Core.Functions
         private string _getPlain(IOrder order)
         {
             var result = new StringBuilder($"Order Receipt for " +
-                                           $"{order.CustomerSalesInfo.CustomerId}{Environment.NewLine}");
+                                           $"{order.CustomerSalesInfo.CustomerName}{Environment.NewLine}");
 
 
             foreach (var line in order.LineItems)
