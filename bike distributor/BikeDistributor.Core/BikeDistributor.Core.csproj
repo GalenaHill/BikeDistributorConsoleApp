@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IOrderManager.cs" />
+    <Compile Include="Functions\OrderManager.cs" />
     <Compile Include="Utilities\AppSettings.cs" />
     <Compile Include="Contracts\IAppSettings.cs" />
     <Compile Include="Contracts\IAssembliesProvider.cs" />
