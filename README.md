@@ -1,31 +1,41 @@
-# BikeDistributorConsoleApp
-Sample project 
+Re:  bike distributor project refactoring
+https://github.com/GalenaHill/BikeDistributorConsoleApp.git
 
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p><strong>Main Changes</strong></p>
-<p><strong>Abstraction, Encapsulation, Separation of Concerns &ndash; introduced from scratch as they were not present in the initial solution<br /> </strong><br /> The main functions (retrieval of discount tiers, the discount calculation and receipt generation) have all been abstracted, encapsulated and injected where needed via Autofac and a &ldquo;Utility Support System&rdquo; consisting of a variety of objects, enumerations and extension methods.&nbsp; Certain properties and types on the Bike, Line and Order objects have also been refactored in order to properly serve the changes above.</p>
-<p><strong>Business rules on issuance of discounts that more closely resemble the real world</strong></p>
-<ol>
-<li>Introduction of discount coefficient tiers based on inventory age. Why:</li>
-<li>Many flooring lines require you to pay of larger and larger portions based on the age of certain items. This hurts cash, and nothing that hurts cash is good.</li>
-<li>Inventory may depreciate with time and the introduction of newer models. This causes retail value to suffer thus leading to lower sales volume and lower gross margins. Once again, old units need to move.</li>
-<li>Discount coefficient tiers based on the size of the order where the most appropriate measure of such size is the orders gross pre-tax amount (i.e. &ldquo;Volume Discounts&rdquo;). Why:&nbsp; Volume based discounts are standard practice.</li>
-</ol>
-<p>Basically, via 1 and 2 above, you are ensuring that (a) older units move faster and (b) your customers are incentivized to place large(r) orders.</p>
-<p>For example:</p>
-<p>Aging based discount tiers</p>
-<ol>
-<li>For all units over 20 days in inventory, discount = 5%;</li>
-<li>For all units over 50 days in inventory, discount = 10%;</li>
-<li>For all units over 90 days in inventory, discount = 20%;</li>
-</ol>
-<p>Volume based discount tiers</p>
-<ol>
-<li>For all orders over $ 1000, discount = 5%;</li>
-<li>For all orders over $ 5000, discount = 10%;</li>
-<li>For all orders over $ 10,000, discount = 20%;</li>
-</ol>
-<p>The retailer can introduce as many tiers as needed.</p>
-<p>The order calculating and receipt generating system will now dynamically accommodate any sort of bike / pricing combinations.&nbsp; The discount tiers are made available via a IMockDiscountRepository object.&nbsp; Why &ndash; such tiered settings are &ldquo;internal&rdquo; in nature and can be / should be managed without having to introduce any new order processing logic / code (i.e. they can be entered via a &ldquo;form&rdquo; and persisted in an internal data store from where they can be retrieved and used by the order processing system). &nbsp;</p>
-<p><strong>Unit testing &ndash; excluded at this time.</strong></p>
+Overview
+
+The two main information management processes addressed in the solution are as follows:
+
+1.  Order calculation of an incoming order;
+2.  Receipt content generation based on a completed order.
+The programmatic logic for handling 1 & 2 above should be (can be) abstracted extensibly.  This has been addressed via the IOrderManager type the functionality of which can be abstracted even further. 
+
+Order calculation
+
+The most dynamic process in the entire solution is the order calculation.  It is subject to a variety of main drivers: 
+	a.  varying number of lines;
+	b.  varying price and quantity per line; 
+	c.  varying discount possibility at the individual line level;
+	d.  varying bike details per line; 
+	e.  varying discount possibility at the aggregate order level; 
+	f.  configurable tax rate; 
+    
+Consequently, domain logic processing should accommodate the dynamic, varying nature of a-f above.  This is currently addressed via the IDiscountProvider type which is injected in the implementation of IOrderManager and the retrieval of the tax rate configuration via an IAppSettings object.    
+Where the domain model composition is to remain intact (order has lines, line has bike), the issuance of discounts at order calculation time can only occur in 2 logical places:
+
+1.  At the individual line level, driven by variables such as:
+	a.  inventory aging;
+	b.  quantity of bikes purchased;
+	c.  quantity of bikes in inventory;
+	d.  bike purchase price;
+    
+2.  At the order aggregate (sub-total) level driven by variables such as:
+	a.  Gross sale volume discount;
+	b.  Preferred customer discount;
+	c.  Other – discretionary discount.
+    
+Consequently, at order computation time, the IDiscountProvider implementation must examine each order at both levels described above.  At the moment, discount issuance logic is limited to accommodate 1.a and 2.a above.  In a real-world implementation, the IDiscountProvider implementations can be refactored to accommodate all of the above and more.
+
+Additional
+
+The remaining functionality (e.g. unit testing) is not currently addressed at this time and will also be implemented in a real-world scenario.
+
