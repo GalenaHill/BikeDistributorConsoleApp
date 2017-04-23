@@ -47,12 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainObjects\CustomerSalesInfo.cs" />
-    <Compile Include="Contracts\domain\ICustomerSalesInfo.cs" />
+    <Compile Include="Contracts\ICustomerSalesInfo.cs" />
     <Compile Include="Contracts\IHasId.cs" />
-    <Compile Include="Contracts\domain\IInventoryItem.cs" />
-    <Compile Include="Contracts\domain\IOrderManager.cs" />
-    <Compile Include="Contracts\domain\ILineItem.cs" />
-    <Compile Include="Contracts\domain\IOrder.cs" />
+    <Compile Include="Contracts\IInventoryItem.cs" />
+    <Compile Include="Contracts\IOrderManager.cs" />
+    <Compile Include="Contracts\ILineItem.cs" />
+    <Compile Include="Contracts\IOrder.cs" />
     <Compile Include="Functions\OrderManager.cs" />
     <Compile Include="Utilities\AppSettings.cs" />
     <Compile Include="Contracts\IAppSettings.cs" />
@@ -64,7 +64,7 @@
     <Compile Include="ServiceRegistration.cs" />
     <Compile Include="DomainObjects\Bike.cs" />
     <Compile Include="Functions\DiscountProvider.cs" />
-    <Compile Include="Contracts\domain\IDiscountProvider.cs" />
+    <Compile Include="Contracts\IDiscountProvider.cs" />
     <Compile Include="Contracts\IDiscountRepository.cs" />
     <Compile Include="DomainObjects\LineItem.cs" />
     <Compile Include="Utilities\AssembliesProvider.cs" />

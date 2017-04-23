@@ -1,7 +1,7 @@
-﻿namespace BikeDistributor.Core.Contracts.domain
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace BikeDistributor.Core.Contracts
+{
     /// <summary>
     /// abstracts / encapsulates data and functionality of
     /// a sales order

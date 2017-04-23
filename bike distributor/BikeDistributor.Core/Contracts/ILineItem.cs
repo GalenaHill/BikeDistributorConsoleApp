@@ -1,4 +1,4 @@
-﻿namespace BikeDistributor.Core.Contracts.domain
+﻿namespace BikeDistributor.Core.Contracts
 {
     /// <summary>
     /// abstracts / encapsulates data points needed in a financial

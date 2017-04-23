@@ -1,4 +1,4 @@
-﻿using BikeDistributor.Core.Contracts.domain;
+﻿using BikeDistributor.Core.Contracts;
 
 namespace BikeDistributor.Core.DomainObjects
 {

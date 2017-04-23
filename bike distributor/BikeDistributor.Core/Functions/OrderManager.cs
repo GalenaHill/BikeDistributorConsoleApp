@@ -1,7 +1,6 @@
 namespace BikeDistributor.Core.Functions
 {
     using System;
-    using Contracts.domain;
     using System.Text;
     using Contracts;
     using Enums;

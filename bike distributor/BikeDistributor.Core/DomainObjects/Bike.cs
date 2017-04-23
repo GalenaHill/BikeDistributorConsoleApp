@@ -1,7 +1,7 @@
-﻿namespace BikeDistributor.Core.DomainObjects
-{
-    using Contracts.domain;
+﻿using BikeDistributor.Core.Contracts;
 
+namespace BikeDistributor.Core.DomainObjects
+{
     public class Bike : IInventoryItem
     {
         public Bike()

@@ -1,7 +1,7 @@
-namespace BikeDistributor.Core.Contracts.domain
-{
-    using Enums;
+using BikeDistributor.Core.Enums;
 
+namespace BikeDistributor.Core.Contracts
+{
     /// <summary>
     /// abstracts / encapsulates the functionality required to
     /// process a sales order

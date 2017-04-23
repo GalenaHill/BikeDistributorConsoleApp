@@ -1,4 +1,4 @@
-namespace BikeDistributor.Core.Contracts.domain
+namespace BikeDistributor.Core.Contracts
 {
     /// <summary>
     /// abstracts / encapsulates logic with regard to 
