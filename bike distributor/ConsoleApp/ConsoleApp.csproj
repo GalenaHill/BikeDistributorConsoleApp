@@ -59,6 +59,10 @@
       <Project>{61a35e62-5edc-4c8b-a66b-cc6c1fd98fcc}</Project>
       <Name>BikeDistributor.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BikeDistributor.MockDataAccess\BikeDistributor.MockDataAccess.csproj">
+      <Project>{b9738250-12d4-4a2f-91ab-2df7fb2ebb93}</Project>
+      <Name>BikeDistributor.MockDataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeDistributor.Core", "BikeDistributor.Core\BikeDistributor.Core.csproj", "{61A35E62-5EDC-4C8B-A66B-CC6C1FD98FCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeDistributor.MockDataAccess", "BikeDistributor.MockDataAccess\BikeDistributor.MockDataAccess.csproj", "{B9738250-12D4-4A2F-91AB-2DF7FB2EBB93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{61A35E62-5EDC-4C8B-A66B-CC6C1FD98FCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61A35E62-5EDC-4C8B-A66B-CC6C1FD98FCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61A35E62-5EDC-4C8B-A66B-CC6C1FD98FCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9738250-12D4-4A2F-91AB-2DF7FB2EBB93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9738250-12D4-4A2F-91AB-2DF7FB2EBB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9738250-12D4-4A2F-91AB-2DF7FB2EBB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9738250-12D4-4A2F-91AB-2DF7FB2EBB93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

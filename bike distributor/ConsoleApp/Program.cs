@@ -13,14 +13,35 @@
         static void Main(string[] args)
         {
             #region initialize mock order
-            string company = "Go Fast Company";
-            var bike1 = new Bike("OG-Rider", "OG-451", 455.99M, 35);
-            var line1 = new Line(bike1, 1000);
-            var order = new Order(company);
+
+            var bike1 = new Bike(
+                "OG-Rider", 
+                "OG-451", 
+                455.99M, 
+                35, 
+                "ENTER CODE HERE");
+
+            var line1 = new LineItem(bike1, 1000);
+
+            var bike2 = new Bike(
+                "Slow-Rider", 
+                "OG-451.2", 
+                121.99M, 10, 
+                "ENTER CODE HERE");
+
+            var line2 = new LineItem(bike2, 500);
+
+            var order = new Order(new CustomerSalesInfo()
+            {
+                CustomerId = "GoFastCustomerId",
+                CustomerName = "GoFastCustomer",
+                DiscountCode = "CCC"
+            });
+
             order.AddLine(line1);
-            var bike2 = new Bike("Slow-Rider", "OG-451.2", 121.99M, 10);
-            var line2 = new Line(bike2, 500);
+
             order.AddLine(line2);
+
             #endregion
 
             var container = _createContainer();

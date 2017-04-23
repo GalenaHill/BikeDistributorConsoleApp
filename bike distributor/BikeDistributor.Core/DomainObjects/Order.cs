@@ -1,26 +1,26 @@
 ﻿namespace BikeDistributor.Core.DomainObjects
 {
+    using Contracts.domain;
     using System.Collections.Generic;
 
-    public class Order
+    public class Order : IOrder
     {
-        public string Id { get; set; } // need this in real life
-
-        public IList<Line> Lines = new List<Line>();
-
-        public Order(string company)
+        public Order(ICustomerSalesInfo customerSalesInfo)
         {
-            Company = company; // this will be an object (entity) in real life
+            this.CustomerSalesInfo = customerSalesInfo;
         }
 
-        public string Company { get; set; }
+        public string Id { get; set; }
 
-        public void AddLine(Line line)
-        {
-            Lines.Add(line);
-        }
+        public string CustomerId { get; set; }
+
+        public ICustomerSalesInfo CustomerSalesInfo { get; set; }
+
+        public ICollection<ILineItem> LineItems { get; set; } = new List<ILineItem>();
 
         public decimal Subtotal { get; set; }
+
+        public decimal ManualDiscountCoefficient { get; set; }
 
         public decimal DiscountCoefficient { get; set; }
 
@@ -34,7 +34,9 @@
 
         public decimal Total { get; set; }
 
-
-
+        public void AddLine(ILineItem lineItem)
+        {
+            LineItems.Add(lineItem);
+        }
     }
 }

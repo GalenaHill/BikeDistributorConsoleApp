@@ -6,7 +6,7 @@
     using Functions;
     using Utilities;
 
-    public class ServiceRegistrations : Module
+    public class ServiceRegistration : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -20,8 +20,6 @@
             .SingleInstance();
 
             builder.Register<AppSettings>().SingleInstance();
-
-            builder.Register<MockDiscountRepository>().SingleInstance();
 
             builder.Register<DiscountProvider>();
 

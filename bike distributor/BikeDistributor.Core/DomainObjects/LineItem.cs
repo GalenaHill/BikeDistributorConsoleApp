@@ -1,14 +1,16 @@
 ﻿namespace BikeDistributor.Core.DomainObjects
 {
-    public class Line
+    using Contracts.domain;
+
+    public class LineItem : ILineItem
     {
-        public Line(Bike bike, int quantity)
+        public LineItem(IInventoryItem inventoryItem, int quantity)
         {
-            Bike = bike;
-            Quantity = quantity;
+            this.InventoryItem = inventoryItem;
+            this.Quantity = quantity;
         }
 
-        public Bike Bike { get; private set; }
+        public IInventoryItem InventoryItem { get; set; }
 
         public int Quantity { get; set; }
 

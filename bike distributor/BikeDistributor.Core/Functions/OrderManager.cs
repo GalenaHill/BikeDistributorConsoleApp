@@ -1,9 +1,9 @@
 namespace BikeDistributor.Core.Functions
 {
     using System;
+    using Contracts.domain;
     using System.Text;
     using Contracts;
-    using DomainObjects;
     using Enums;
     using ExtensionMethods;
 
@@ -26,17 +26,17 @@ namespace BikeDistributor.Core.Functions
 
         private readonly IDiscountProvider _discountProvider;
 
-        public Order CalcualteOrder(Order incomingOrder)
+        public IOrder CalcualteOrder(IOrder incomingOrder)
         {
             incomingOrder.Subtotal = 0;
 
             // lines
-            foreach (var line in incomingOrder.Lines)
+            foreach (var line in incomingOrder.LineItems)
             {
-                line.TotalBeforeDiscount = line.Bike.Price * line.Quantity;
+                line.TotalBeforeDiscount = line.InventoryItem.Price * line.Quantity;
 
                 line.DiscountCoefficient = this._discountProvider
-                    .IssueAgingDiscount(line.Bike.DaysInInventory);
+                    .ScanLineItem(line);
 
                 line.DiscountAmount =
                     line.TotalBeforeDiscount * line.DiscountCoefficient;
@@ -48,7 +48,8 @@ namespace BikeDistributor.Core.Functions
 
             //rest
             incomingOrder.DiscountCoefficient =
-                this._discountProvider.IssueVolumeDiscount(incomingOrder.Subtotal);
+                this._discountProvider.ScanOrder(incomingOrder) + 
+                incomingOrder.ManualDiscountCoefficient;
 
             incomingOrder.DiscountAmount =
                 incomingOrder.DiscountCoefficient * incomingOrder.Subtotal;
@@ -67,16 +68,21 @@ namespace BikeDistributor.Core.Functions
             return incomingOrder;
         }
 
-        public string GetReceipt(Order calculatedOrder, ReceiptType receiptType)
+        public string GetReceipt(IOrder calculatedOrder, ReceiptType receiptType)
         {
+            // this needs further abstraction - IReceieptMaker etc...
+
             if (receiptType == ReceiptType.Plain)
             {
                 return _getPlain(calculatedOrder);
+
             }
             else if (receiptType == ReceiptType.Html)
+
             {
                 return _getHtml(calculatedOrder);
             }
+
             else
             {
                 return "You ask for it - you got it - NO reciept for you!";
@@ -85,20 +91,20 @@ namespace BikeDistributor.Core.Functions
 
         #region privates
 
-        private string _getPlain(Order order)
+        private string _getPlain(IOrder order)
         {
             var result = new StringBuilder($"Order Receipt for " +
-                                           $"{order.Company}{Environment.NewLine}");
+                                           $"{order.CustomerSalesInfo.CustomerId}{Environment.NewLine}");
 
 
-            foreach (var line in order.Lines)
+            foreach (var line in order.LineItems)
             {
 
                 result.AppendLine(
                     $"{line.Quantity} bikes of brand " +
-                    $"{line.Bike.Brand} at " +
+                    $"{line.InventoryItem.Brand} at " +
                     $"{line.DiscountCoefficient * 100} % disc at " +
-                    $"{line.Bike.Price} each  = a pre-tax total of " +
+                    $"{line.InventoryItem.Price} each  = a pre-tax total of " +
                     $"{line.Total.ToString("C")}");
             }
 
@@ -116,7 +122,7 @@ namespace BikeDistributor.Core.Functions
             return result.ToString();
         }
 
-        private string _getHtml(Order order)
+        private string _getHtml(IOrder order)
         {
             throw new NotImplementedException(
                 "Same thing here other than the html markup string - " +
