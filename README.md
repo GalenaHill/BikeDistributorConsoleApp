@@ -17,9 +17,9 @@ All refactoring now accommodates for the dynamic, varying nature of a-f above vi
 
 3. Discount theory:  Where the domain model composition is to remain intact ( **IOrder** has **ILineItems** , **ILineItem** has **IInventoryItem** (implemented as **Order** -&gt; **LineItem** (s) -&gt; **Bike** ), the issuance of discounts at order calculation time can only occur in 2 logical places:
 
-a.  At the individual line level;
+a.  At the individual line level (where an inventory item "arrives" as a result of frontline (sales) activity event);
 
-b.  At the order aggregate (sub-total) level;
+b.  At the order aggregate (sub-total) level (where the order's pre tax totals are now available as they are derivative of all line items which have been finalized at that time);
 
 Consequently, at order computation time, an **IDiscountProvider** implementation is charged with &quot;scanning&quot; and retrieving the appropriate discount at both levels described above.
 
