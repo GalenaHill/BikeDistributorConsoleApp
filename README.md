@@ -28,5 +28,5 @@ As refactored, discount issuance logic of the **IDiscountProvider** implementati
 Thanks for looking!
 
 GalenaHill, 
- _A financial SaaS BI outfitter for the Man in the Arena_
+/ _A financial SaaS BI outfitter for the Man in the Arena_ / 
 galenahill.com
