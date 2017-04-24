@@ -5,6 +5,7 @@ namespace BikeDistributor.Core.Functions
     using Contracts;
     using Enums;
 
+    // repetativo, but this would be a different implementation in real life
     public class SomeOtherFormatOrderReceiptGenerator : IReceiptGenerator
     {
         public ReceiptFormatType Name { get; set; } = ReceiptFormatType.MockOtherOrderFormat;
