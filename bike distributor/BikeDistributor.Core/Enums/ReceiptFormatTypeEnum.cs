@@ -1,11 +1,11 @@
 ﻿namespace BikeDistributor.Core.Enums
 {
-    public enum ReceiptType
+    public enum ReceiptFormatType
     {
         //
-        Plain = 0,
+        PlainOrderFormat = 0,
         //
-        Html = 1,
+        MockOtherOrderFormat = 1,
         //
         None = 99
     }

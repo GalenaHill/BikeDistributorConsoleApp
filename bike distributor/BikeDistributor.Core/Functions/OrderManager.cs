@@ -1,7 +1,8 @@
 namespace BikeDistributor.Core.Functions
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System;
-    using System.Text;
     using Contracts;
     using Enums;
     using ExtensionMethods;
@@ -9,7 +10,9 @@ namespace BikeDistributor.Core.Functions
     public class OrderManager : IOrderManager
     {
         public OrderManager(
-            IDiscountProvider discountProvider, IAppSettings appSettings)
+            IDiscountProvider discountProvider,
+            IAppSettings appSettings,
+            Func<string, IEnumerable<IReceiptGenerator>> recGeneratorFactory)
         {
             if (appSettings == null)
             {
@@ -17,13 +20,13 @@ namespace BikeDistributor.Core.Functions
             }
 
             this._taxRate = appSettings.Get<decimal>("taxRate");
-
             this._discountProvider = discountProvider;
+            this._receiptGeneratorFactory = recGeneratorFactory;
         }
 
         private readonly decimal _taxRate;
-
         private readonly IDiscountProvider _discountProvider;
+        private readonly Func<string, IEnumerable<IReceiptGenerator>> _receiptGeneratorFactory;
 
         public IOrder CalcualteOrder(IOrder incomingOrder)
         {
@@ -47,7 +50,7 @@ namespace BikeDistributor.Core.Functions
 
             //rest
             incomingOrder.DiscountCoefficient =
-                this._discountProvider.ScanOrder(incomingOrder) + 
+                this._discountProvider.ScanOrder(incomingOrder) +
                 incomingOrder.ManualDiscountCoefficient;
 
             incomingOrder.DiscountAmount =
@@ -67,67 +70,22 @@ namespace BikeDistributor.Core.Functions
             return incomingOrder;
         }
 
-        public string GetReceipt(IOrder calculatedOrder, ReceiptType receiptType)
+        public dynamic GetReceipt(
+            IOrder calculatedOrder, ReceiptFormatType receiptFormatType)
         {
-            // this needs further abstraction - IReceieptMaker etc...
+            var generator =
+                this._receiptGeneratorFactory(
+                    Enum.GetName(typeof(ReceiptFormatType), receiptFormatType))
+                    .FirstOrDefault(x => x.Name == receiptFormatType);
 
-            if (receiptType == ReceiptType.Plain)
+            if (generator == null)
             {
-                return _getPlain(calculatedOrder);
-
-            }
-            else if (receiptType == ReceiptType.Html)
-
-            {
-                return _getHtml(calculatedOrder);
+                throw new InvalidOperationException(
+                    $"BOOM! - get a receipt generator to match!!! " +
+                    $"{nameof(this.GetType)}");
             }
 
-            else
-            {
-                return "You ask for it - you got it - NO reciept for you!";
-            }
+            return generator.GetReciept(calculatedOrder);
         }
-
-        #region privates
-
-        private string _getPlain(IOrder order)
-        {
-            var result = new StringBuilder($"Order Receipt for " +
-                                           $"{order.CustomerSalesInfo.CustomerName}{Environment.NewLine}");
-
-
-            foreach (var line in order.LineItems)
-            {
-
-                result.AppendLine(
-                    $"{line.Quantity} bikes of brand " +
-                    $"{line.InventoryItem.Brand} at " +
-                    $"{line.DiscountCoefficient * 100} % disc at " +
-                    $"{line.InventoryItem.Price} each  = a pre-tax total of " +
-                    $"{line.Total.ToString("C")}");
-            }
-
-            result.AppendLine($"Sub Total: {order.Subtotal.ToString("C")}");
-
-            result.AppendLine($"Additional discount at {order.DiscountCoefficient * 100} pct : " +
-                              $"{(-order.DiscountAmount).ToString("C")}");
-
-            result.AppendLine($"Sub Total Net Discount: {order.SubTotalNetDiscount.ToString("C")}");
-
-            result.AppendLine($"Tax at {_taxRate * 100} %: {(order.TaxAmount).ToString("C")}");
-
-            result.AppendLine($"Order Total {order.Total.ToString("C")}");
-
-            return result.ToString();
-        }
-
-        private string _getHtml(IOrder order)
-        {
-            throw new NotImplementedException(
-                "Same thing here other than the html markup string - " +
-                "going to skip this for now...");
-        }
-
-        #endregion
     }
 }

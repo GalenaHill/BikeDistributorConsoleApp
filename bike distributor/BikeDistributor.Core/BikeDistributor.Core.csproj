@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IRecieptGenerator.cs" />
     <Compile Include="DomainObjects\CustomerSalesInfo.cs" />
     <Compile Include="Contracts\ICustomerSalesInfo.cs" />
     <Compile Include="Contracts\IHasId.cs" />
@@ -59,7 +60,7 @@
     <Compile Include="Contracts\IAssembliesProvider.cs" />
     <Compile Include="ExtensionMethods\AppSettingsExtensions.cs" />
     <Compile Include="ExtensionMethods\DecimalExtensions.cs" />
-    <Compile Include="Enums\ReceiptTypeEnum.cs" />
+    <Compile Include="Enums\ReceiptFormatTypeEnum.cs" />
     <Compile Include="ExtensionMethods\ContainerBuilderExtensions.cs" />
     <Compile Include="ServiceRegistration.cs" />
     <Compile Include="DomainObjects\Bike.cs" />
