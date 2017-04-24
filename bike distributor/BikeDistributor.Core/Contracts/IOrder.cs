@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace BikeDistributor.Core.Contracts
+﻿namespace BikeDistributor.Core.Contracts
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// abstracts / encapsulates data and functionality of
     /// a sales order

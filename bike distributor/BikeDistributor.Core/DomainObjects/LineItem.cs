@@ -1,7 +1,7 @@
-﻿using BikeDistributor.Core.Contracts;
-
-namespace BikeDistributor.Core.DomainObjects
+﻿namespace BikeDistributor.Core.DomainObjects
 {
+    using Contracts;
+
     public class LineItem : ILineItem
     {
         public LineItem(IInventoryItem inventoryItem, int quantity)

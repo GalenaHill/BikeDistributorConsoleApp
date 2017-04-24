@@ -1,7 +1,6 @@
-﻿using BikeDistributor.Core.Contracts;
-
-namespace BikeDistributor.Core.DomainObjects
+﻿namespace BikeDistributor.Core.DomainObjects
 {
+    using Contracts;
     using System.Collections.Generic;
 
     public class Order : IOrder

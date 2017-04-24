@@ -1,7 +1,7 @@
-using BikeDistributor.Core.Enums;
-
 namespace BikeDistributor.Core.Contracts
 {
+    using Enums;
+
     /// <summary>
     /// generates reciepts for any type and any specified format
     /// </summary>
