@@ -31,7 +31,7 @@ As refactored, discount issuance logic of the **IDiscountProvider** implementati
 5.  For further consideration:  Due to the test nature of the solution, the above functionality may not have been addressed optimally:  In a real-world scenario, a variety of business process requirements specific to industry / individual client must be obtained.  This solution is merely a demonstration of process analysis within the context of a programmatic solution to a business problem.
 
 
-Thanks you for looking!
+Thank you for looking!
 
 GalenaHill 
 / _A SaaS BI outfitter for the Man in the Arena_ / 
