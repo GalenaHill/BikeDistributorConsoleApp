@@ -38,7 +38,7 @@
                 .AssignableTo<IReceiptGenerator>()
                 .AsSelf()
                 .Named<IReceiptGenerator>(
-                Enum.GetName(typeof(ReceiptFormatType), ReceiptFormatType.PlainOrderFormat))
+                Enum.GetName(typeof(ReceiptFunctionality), ReceiptFunctionality.OrderReceiptInStringFormat))
                 .AsImplementedInterfaces();
 
             //  mock other type receipt builder
@@ -49,7 +49,7 @@
                 .AssignableTo<IReceiptGenerator>()
                 .AsSelf()
                 .Named<IReceiptGenerator>(
-                Enum.GetName(typeof(ReceiptFormatType), ReceiptFormatType.MockOtherOrderFormat))
+                Enum.GetName(typeof(ReceiptFunctionality), ReceiptFunctionality.OrderReceiptInSomeOtherFormat))
                 .AsImplementedInterfaces();
 
             // builder factory

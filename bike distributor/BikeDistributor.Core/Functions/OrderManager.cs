@@ -71,12 +71,12 @@ namespace BikeDistributor.Core.Functions
         }
 
         public dynamic GetReceipt(
-            IOrder calculatedOrder, ReceiptFormatType receiptFormatType)
+            IOrder calculatedOrder, ReceiptFunctionality receiptFunctionality)
         {
             var generator =
                 this._receiptGeneratorFactory(
-                    Enum.GetName(typeof(ReceiptFormatType), receiptFormatType))
-                    .FirstOrDefault(x => x.Name == receiptFormatType);
+                    Enum.GetName(typeof(ReceiptFunctionality), receiptFunctionality))
+                    .FirstOrDefault(x => x.Name == receiptFunctionality);
 
             if (generator == null)
             {

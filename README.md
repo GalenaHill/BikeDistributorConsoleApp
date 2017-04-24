@@ -26,8 +26,12 @@ Consequently, at order computation time, an **IDiscountProvider** implementation
 
 As refactored, discount issuance logic of the **IDiscountProvider** implementation closely models business process reality by dynamically accommodating for a variety of discount issuance events which can occur at _both_ the management (configuration, policy) level as well as at the sales (point of sale, wholesale) level without the need to recompile / redeploy.
 
+4.  Receipt issuance theory:  The creation of a receipt is typicall subject to a variety of drivers (business policy, point of sale customer requirements, etc.).  At present, receipt generation and delivery has been handled in a polymorphic manner as named implementers of the **IReceiptGenerator** GetReciept() function are allowed to behave in a varying manner and injected dynamically based on the specific functionality desired by their caller.  This varying behavior can include format (string v html), form of submittal (e-mail v. sms) etc. and further covers receipt generation for any business object that is required to be receipted.   
 
-Thanks for looking!
+5.  For further consideration:  Due to the test nature of the solution, the above functionality may not have been addressed optimally:  In a real-world scenario, a variety of business process requirements specific to industry / individual client must be obtained.  This solution is merely a demonstration of process analysis within the context of a programmatic solution to a business problem.
+
+
+Thanks you for looking!
 
 GalenaHill 
 / _A SaaS BI outfitter for the Man in the Arena_ / 

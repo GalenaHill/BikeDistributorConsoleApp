@@ -7,7 +7,7 @@ namespace BikeDistributor.Core.Functions
 
     public class PlainStringOrderReceiptGenerator : IReceiptGenerator
     {
-        public ReceiptFormatType Name { get; set; } = ReceiptFormatType.PlainOrderFormat;
+        public ReceiptFunctionality Name { get; set; } = ReceiptFunctionality.OrderReceiptInStringFormat;
 
         public dynamic GetReciept(object document)
         {

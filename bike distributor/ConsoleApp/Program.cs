@@ -54,7 +54,7 @@
 
             Console.WriteLine(
                 orderManager.GetReceipt(
-                    orderManager.CalcualteOrder(order), ReceiptFormatType.PlainOrderFormat));
+                    orderManager.CalcualteOrder(order), ReceiptFunctionality.OrderReceiptInStringFormat));
         }
 
         private static IContainer _createContainer()

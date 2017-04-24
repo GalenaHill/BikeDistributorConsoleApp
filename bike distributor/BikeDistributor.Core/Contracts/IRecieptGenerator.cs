@@ -7,7 +7,7 @@ namespace BikeDistributor.Core.Contracts
     /// </summary>
     public interface IReceiptGenerator
     {
-        ReceiptFormatType Name { get; set; }
+        ReceiptFunctionality Name { get; set; }
         dynamic GetReciept(object incomingDocument);
     }
 }

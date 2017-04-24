@@ -8,6 +8,6 @@ namespace BikeDistributor.Core.Contracts
     public interface IOrderManager
     {
         IOrder CalcualteOrder(IOrder incomingOrder);
-        dynamic GetReceipt(IOrder calculatedOrder, ReceiptFormatType receiptFormatType);
+        dynamic GetReceipt(IOrder calculatedOrder, ReceiptFunctionality receiptFunctionality);
     }
 }

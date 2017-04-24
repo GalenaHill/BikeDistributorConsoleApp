@@ -8,7 +8,7 @@ namespace BikeDistributor.Core.Functions
     // repetativo, but this would be a different implementation in real life
     public class SomeOtherFormatOrderReceiptGenerator : IReceiptGenerator
     {
-        public ReceiptFormatType Name { get; set; } = ReceiptFormatType.MockOtherOrderFormat;
+        public ReceiptFunctionality Name { get; set; } = ReceiptFunctionality.OrderReceiptInSomeOtherFormat;
 
         public dynamic GetReciept(object document)
         {
