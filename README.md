@@ -1,6 +1,6 @@
 **Solution refactoring memo**
 
-As refacored, the solution has been enabled as follows:
+As refactored, the solution has been enabled as follows:
 
 1.  Order processing (dynamic calculation and dynamic reciept issuance) for any product item (not just bikes), with receipt / post transaction handling capability for any business object required to be receipted / handled in any manner desireable;
 
