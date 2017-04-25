@@ -1,3 +1,5 @@
+using BikeDistributor.Core.Contracts.dataAccess;
+
 namespace BikeDistributor.MockDataAccess
 {
     using System.Collections.Generic;
@@ -7,27 +9,7 @@ namespace BikeDistributor.MockDataAccess
 
     public class MockDiscountRepository : IDiscountRepository
     {
-        public IDictionary<int, decimal> AgeDiscountPairs()
-        {
-            return new Dictionary<int, decimal>()
-            {
-                [20] = .05M,
-                [50] = .10M,
-                [90] = .20M
-            };
-        }
-
-        public IDictionary<decimal, decimal> VolumeDiscountPairs()
-        {
-            return new Dictionary<decimal, decimal>()
-            {
-                [1000M] = .05M,
-                [5000M] = .10M,
-                [10000M] = .20M
-            };
-        }
-
-        public IDictionary<string, decimal> DiscountCodePairs()
+        public IDictionary<string, decimal> PromoCodeDiscountPairs()
         {
             return new Dictionary<string, decimal>()
             {

@@ -1,16 +1,18 @@
 ﻿namespace BikeDistributor.Core.DomainObjects
 {
-    using Contracts;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Contracts.domainObjects;
 
     public class LineItem : ILineItem
     {
-        public LineItem(IInventoryItem inventoryItem, int quantity)
+        public LineItem(IProductInfo productInfoItem, int quantity)
         {
-            this.InventoryItem = inventoryItem;
+            this.ProductInfoItem = productInfoItem;
             this.Quantity = quantity;
         }
 
-        public IInventoryItem InventoryItem { get; set; }
+        public IProductInfo ProductInfoItem { get; set; }
 
         public int Quantity { get; set; }
 
@@ -22,5 +24,18 @@
 
         public decimal Total { get; set; }
 
+        public ICollection<IDiscountItem> DiscountItems { get; set; } = new List<IDiscountItem>();
+
+        public void AddDiscount(IDiscountItem discountItem)
+        {
+            DiscountItems.Add(discountItem);
+        }
+
+        public decimal ManualDiscount { get; set; }
+
+        public decimal GetTotalDiscount()
+        {
+            return this.DiscountItems.Sum(x => x.DiscountCoefficient) + this.ManualDiscount;
+        }
     }
 }

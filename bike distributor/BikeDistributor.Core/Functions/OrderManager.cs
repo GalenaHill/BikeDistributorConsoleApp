@@ -1,18 +1,20 @@
 namespace BikeDistributor.Core.Functions
 {
+    using Contracts.domainObjects;
+    using Contracts.functions;
+    using Contracts.utilities;
     using System.Collections.Generic;
     using System.Linq;
     using System;
-    using Contracts;
     using Enums;
     using ExtensionMethods;
 
     public class OrderManager : IOrderManager
     {
         public OrderManager(
-            IDiscountProvider discountProvider,
             IAppSettings appSettings,
-            Func<string, IEnumerable<IReceiptGenerator>> recGeneratorFactory)
+            Func<string, IEnumerable<IReceiptManager>> recGeneratorFactory, 
+            IEnumerable<IDiscountScanner> discountScanners)
         {
             if (appSettings == null)
             {
@@ -20,41 +22,89 @@ namespace BikeDistributor.Core.Functions
             }
 
             this._taxRate = appSettings.Get<decimal>("taxRate");
-            this._discountProvider = discountProvider;
             this._receiptGeneratorFactory = recGeneratorFactory;
+            this._discountScanners = discountScanners;
         }
 
         private readonly decimal _taxRate;
-        private readonly IDiscountProvider _discountProvider;
-        private readonly Func<string, IEnumerable<IReceiptGenerator>> _receiptGeneratorFactory;
+        private readonly Func<string, IEnumerable<IReceiptManager>> _receiptGeneratorFactory;
+        private readonly IEnumerable<IDiscountScanner> _discountScanners;
 
-        public IOrder CalcualteOrder(IOrder incomingOrder)
+        //public ISalesOrder CalcualteOrder(ISalesOrder incomingOrder)
+        //{
+        //    incomingOrder.Subtotal = 0;
+
+        //    // lines
+        //    foreach (var line in incomingOrder.LineItems)
+        //    {
+        //        line.TotalBeforeDiscount = line.ProductInfoItem.Price * line.Quantity;
+
+        //        line.DiscountCoefficient = this._discountProvider
+        //            .ScanLineItem(line);
+
+        //        line.DiscountAmount =
+        //            line.TotalBeforeDiscount * line.DiscountCoefficient;
+
+        //        line.Total = line.TotalBeforeDiscount - line.DiscountAmount;
+
+        //        incomingOrder.Subtotal += line.Total;
+        //    }
+
+        //    //rest
+        //    incomingOrder.DiscountCoefficient =
+        //        this._discountProvider.ScanOrder(incomingOrder) +
+        //        incomingOrder.ManualDiscountCoefficient;
+
+        //    incomingOrder.DiscountAmount =
+        //        incomingOrder.DiscountCoefficient * incomingOrder.Subtotal;
+
+        //    incomingOrder.SubTotalNetDiscount =
+        //        incomingOrder.Subtotal - incomingOrder.DiscountAmount;
+
+        //    incomingOrder.TaxCoefficient = this._taxRate;
+
+        //    incomingOrder.TaxAmount =
+        //        incomingOrder.SubTotalNetDiscount * this._taxRate;
+
+        //    incomingOrder.Total =
+        //        incomingOrder.SubTotalNetDiscount + incomingOrder.TaxAmount;
+
+        //    return incomingOrder;
+        //}
+
+        public ISalesOrder CalcualteOrder(ISalesOrder incomingOrder)
         {
             incomingOrder.Subtotal = 0;
+
+            // line level discount scan
+            foreach (var scanner in this._discountScanners
+                .Where(x => x.ScannerLevel == OrderScanLevel.LineItemLevel))
+            {
+                scanner.Scan(incomingOrder);
+            }
 
             // lines
             foreach (var line in incomingOrder.LineItems)
             {
-                line.TotalBeforeDiscount = line.InventoryItem.Price * line.Quantity;
-
-                line.DiscountCoefficient = this._discountProvider
-                    .ScanLineItem(line);
+                line.TotalBeforeDiscount = line.ProductInfoItem.Price * line.Quantity;
 
                 line.DiscountAmount =
-                    line.TotalBeforeDiscount * line.DiscountCoefficient;
+                    line.TotalBeforeDiscount * line.GetTotalDiscount();
 
                 line.Total = line.TotalBeforeDiscount - line.DiscountAmount;
 
                 incomingOrder.Subtotal += line.Total;
             }
 
-            //rest
-            incomingOrder.DiscountCoefficient =
-                this._discountProvider.ScanOrder(incomingOrder) +
-                incomingOrder.ManualDiscountCoefficient;
+            // order level discount scan
+            foreach (var scanner in this._discountScanners
+                .Where(x => x.ScannerLevel == OrderScanLevel.AggregateOrderLevel))
+            {
+                scanner.Scan(incomingOrder);
+            }
 
             incomingOrder.DiscountAmount =
-                incomingOrder.DiscountCoefficient * incomingOrder.Subtotal;
+                incomingOrder.GetTotalDiscount() * incomingOrder.Subtotal;
 
             incomingOrder.SubTotalNetDiscount =
                 incomingOrder.Subtotal - incomingOrder.DiscountAmount;
@@ -71,7 +121,8 @@ namespace BikeDistributor.Core.Functions
         }
 
         public dynamic GetReceipt(
-            IOrder calculatedOrder, ReceiptFunctionality receiptFunctionality)
+            ISalesOrder calculatedOrder, 
+            ReceiptFunctionality receiptFunctionality)
         {
             var generator =
                 this._receiptGeneratorFactory(

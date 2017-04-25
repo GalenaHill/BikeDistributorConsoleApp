@@ -1,12 +1,14 @@
-﻿namespace BikeDistributor.Core.Contracts
+﻿namespace BikeDistributor.Core.Contracts.domainObjects
 {
+    using utilities;
+
     /// <summary>
     /// abstracts / encapsulates data points needed in a financial
     /// transaction involving and inventory item
     /// </summary>
-    public interface ILineItem
+    public interface ILineItem : IHasDiscountItem
     {
-        IInventoryItem InventoryItem { get; set; }
+        IProductInfo ProductInfoItem { get; set; }
 
         decimal DiscountAmount { get; set; }
 

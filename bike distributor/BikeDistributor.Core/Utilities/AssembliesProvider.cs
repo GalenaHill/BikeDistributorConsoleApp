@@ -7,7 +7,7 @@ namespace BikeDistributor.Core.Utilities
     using System.Reflection;
     using System.Web.Compilation;
     using System.Web.Hosting;
-    using Contracts;
+    using Contracts.utilities;
 
     public class AssembliesProvider : IAssembliesProvider
     {

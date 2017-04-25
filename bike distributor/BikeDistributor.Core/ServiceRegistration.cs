@@ -7,8 +7,8 @@
     using Utilities;
     using System.Collections.Generic;
     using System.Reflection;
-    using Contracts;
     using Enums;
+    using Contracts.functions;
 
     public class ServiceRegistration : Autofac.Module
     {
@@ -25,8 +25,6 @@
 
             builder.Register<AppSettings>().SingleInstance();
 
-            builder.Register<DiscountProvider>();
-
             builder.Register<OrderManager>();
 
             #region receipt generators and factory
@@ -35,10 +33,11 @@
                 .RegisterAssemblyTypes(Assembly
                     .GetAssembly(typeof(ServiceRegistration)))
                 .Where(t => !t.IsAbstract && t.IsClass)
-                .AssignableTo<IReceiptGenerator>()
+                .AssignableTo<IReceiptManager>()
                 .AsSelf()
-                .Named<IReceiptGenerator>(
-                Enum.GetName(typeof(ReceiptFunctionality), ReceiptFunctionality.OrderReceiptInStringFormat))
+                .Named<IReceiptManager>(
+                Enum.GetName(typeof(ReceiptFunctionality), 
+                        ReceiptFunctionality.OrderReceiptInStringFormat))
                 .AsImplementedInterfaces();
 
             //  mock other type receipt builder
@@ -46,22 +45,31 @@
                 .RegisterAssemblyTypes(Assembly
                     .GetAssembly(typeof(ServiceRegistration)))
                 .Where(t => !t.IsAbstract && t.IsClass)
-                .AssignableTo<IReceiptGenerator>()
+                .AssignableTo<IReceiptManager>()
                 .AsSelf()
-                .Named<IReceiptGenerator>(
-                Enum.GetName(typeof(ReceiptFunctionality), ReceiptFunctionality.OrderReceiptInSomeOtherFormat))
+                .Named<IReceiptManager>(
+                Enum.GetName(
+                        typeof(ReceiptFunctionality), 
+                        ReceiptFunctionality.OrderReceiptInSomeOtherFormat))
                 .AsImplementedInterfaces();
 
             // builder factory
-            builder.Register<Func<string, IEnumerable<IReceiptGenerator>>>(
+            builder.Register<Func<string, IEnumerable<IReceiptManager>>>(
                 c =>
                 {
                     var ctx = c.Resolve<IComponentContext>();
 
-                    return name => ctx.ResolveNamed<IEnumerable<IReceiptGenerator>>(name);
+                    return name => ctx.ResolveNamed<IEnumerable<IReceiptManager>>(name);
                 });
 
             #endregion
+
+            // discount scanners
+            builder.RegisterAssemblyTypes(this.ThisAssembly)
+                .Where(t => !t.IsAbstract && t.IsClass)
+                .AssignableTo<IDiscountScanner>()
+                .AsSelf()
+                .AsImplementedInterfaces();
         }
     }
 }

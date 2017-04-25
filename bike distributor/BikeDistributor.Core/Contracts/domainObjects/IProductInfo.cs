@@ -1,13 +1,13 @@
-namespace BikeDistributor.Core.Contracts
+namespace BikeDistributor.Core.Contracts.domainObjects
 {
+    using utilities;
+
     /// <summary>
     /// models a simple inventory item
     /// </summary>
-    public interface IInventoryItem : IHasId<string>
+    public interface IProductInfo : IHasId<string>
     {
         string Brand { get; }
-
-        int DaysInInventory { get; set; }
 
         string DiscountCode { get; set; }
 

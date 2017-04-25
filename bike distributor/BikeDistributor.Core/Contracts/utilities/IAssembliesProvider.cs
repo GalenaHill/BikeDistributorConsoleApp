@@ -1,4 +1,4 @@
-namespace BikeDistributor.Core.Contracts
+namespace BikeDistributor.Core.Contracts.utilities
 {
     using System.Collections.Generic;
     using System.Reflection;

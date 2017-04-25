@@ -14,32 +14,32 @@
         {
             #region initialize mock order
 
-            var bike1 = new Bike(
+            var bike1 = new BikeProductInfo(
                 "OG-Rider",
                 "OG-451",
                 455.99M,
-                35,
                 "ABC-123");
 
             var line1 = new LineItem(bike1, 1000);
 
-            var bike2 = new Bike(
+            var bike2 = new BikeProductInfo(
                 "Slow-Rider",
                 "OG-451.2",
-                121.99M, 10,
+                121.99M,
                 "FGH-789");
 
-            var line2 = new LineItem(bike2, 500);
+            var line2 = new LineItem(bike2, 1
+                );
 
-            var order = new Order(
-                new CustomerSalesInfo()
+            var order = new SalesOrder(
+                new CustomerInfo()
                 {
-                    CustomerId = "GoFastCustomerId",
+                    CustomerId = "CustomerId-123",
                     CustomerName = "GoFastCustomer",
                     DiscountCode = "CCC"
                 })
             {
-                ManualDiscountCoefficient = .05M
+                ManualDiscount = .0M
             };
 
             order.AddLine(line1);
@@ -54,7 +54,8 @@
 
             Console.WriteLine(
                 orderManager.GetReceipt(
-                    orderManager.CalcualteOrder(order), ReceiptFunctionality.OrderReceiptInStringFormat));
+                    orderManager.CalcualteOrder(order), 
+                    ReceiptFunctionality.OrderReceiptInStringFormat));
         }
 
         private static IContainer _createContainer()

@@ -46,32 +46,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IRecieptGenerator.cs" />
+    <Compile Include="Contracts\domainObjects\IDiscountItem.cs" />
+    <Compile Include="Contracts\utilities\IHasDiscountItem.cs" />
+    <Compile Include="DomainObjects\DiscountItem.cs" />
+    <Compile Include="Enums\OrderScanLevel.cs" />
+    <Compile Include="Functions\DiscountScanners\orderLevel\CustomerDiscountOrderScanner.cs" />
+    <Compile Include="Contracts\functions\IDiscountScanner.cs" />
+    <Compile Include="Contracts\functions\IRecieptManager.cs" />
+    <Compile Include="Functions\DiscountScanners\lineItemLevel\ProductPromoOrderScanner.cs" />
     <Compile Include="Functions\SomeOtherFormatOrderReceiptGenerator.cs" />
     <Compile Include="Functions\PlainStringOrderReceiptGenerator.cs" />
-    <Compile Include="DomainObjects\CustomerSalesInfo.cs" />
-    <Compile Include="Contracts\ICustomerSalesInfo.cs" />
-    <Compile Include="Contracts\IHasId.cs" />
-    <Compile Include="Contracts\IInventoryItem.cs" />
-    <Compile Include="Contracts\IOrderManager.cs" />
-    <Compile Include="Contracts\ILineItem.cs" />
-    <Compile Include="Contracts\IOrder.cs" />
+    <Compile Include="DomainObjects\CustomerInfo.cs" />
+    <Compile Include="Contracts\domainObjects\ICustomerInfo.cs" />
+    <Compile Include="Contracts\utilities\IHasId.cs" />
+    <Compile Include="Contracts\domainObjects\IProductInfo.cs" />
+    <Compile Include="Contracts\functions\IOrderManager.cs" />
+    <Compile Include="Contracts\domainObjects\ILineItem.cs" />
+    <Compile Include="Contracts\domainObjects\ISalesOrder.cs" />
     <Compile Include="Functions\OrderManager.cs" />
     <Compile Include="Utilities\AppSettings.cs" />
-    <Compile Include="Contracts\IAppSettings.cs" />
-    <Compile Include="Contracts\IAssembliesProvider.cs" />
+    <Compile Include="Contracts\utilities\IAppSettings.cs" />
+    <Compile Include="Contracts\utilities\IAssembliesProvider.cs" />
     <Compile Include="ExtensionMethods\AppSettingsExtensions.cs" />
     <Compile Include="ExtensionMethods\DecimalExtensions.cs" />
-    <Compile Include="Enums\ReceiptFormatTypeEnum.cs" />
+    <Compile Include="Enums\ReceiptFunctionalityEnum.cs" />
     <Compile Include="ExtensionMethods\ContainerBuilderExtensions.cs" />
     <Compile Include="ServiceRegistration.cs" />
-    <Compile Include="DomainObjects\Bike.cs" />
-    <Compile Include="Functions\DiscountProvider.cs" />
-    <Compile Include="Contracts\IDiscountProvider.cs" />
-    <Compile Include="Contracts\IDiscountRepository.cs" />
+    <Compile Include="DomainObjects\BikeProductInfo.cs" />
+    <Compile Include="Contracts\dataAccess\IDiscountRepository.cs" />
     <Compile Include="DomainObjects\LineItem.cs" />
     <Compile Include="Utilities\AssembliesProvider.cs" />
-    <Compile Include="DomainObjects\Order.cs" />
+    <Compile Include="DomainObjects\SalesOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

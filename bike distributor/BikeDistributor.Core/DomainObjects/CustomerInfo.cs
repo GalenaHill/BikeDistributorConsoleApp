@@ -1,15 +1,15 @@
 ﻿namespace BikeDistributor.Core.DomainObjects
 {
-    using Contracts;
+    using Contracts.domainObjects;
 
-    public class CustomerSalesInfo : ICustomerSalesInfo
+    public class CustomerInfo : ICustomerInfo
     {
-        public CustomerSalesInfo()
+        public CustomerInfo()
         {
             
         }
 
-        public CustomerSalesInfo(
+        public CustomerInfo(
             string customerId, 
             string customerName, 
             string discountCode)

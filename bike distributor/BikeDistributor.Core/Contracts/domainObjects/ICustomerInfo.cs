@@ -1,10 +1,10 @@
-﻿namespace BikeDistributor.Core.Contracts
+﻿namespace BikeDistributor.Core.Contracts.domainObjects
 {
     /// <summary>
     /// encapsulates customer infomration relavent to 
     /// sales order processing
     /// </summary>
-    public interface ICustomerSalesInfo
+    public interface ICustomerInfo
     {
         string CustomerId { get; set; }
         string CustomerName { get; set; }

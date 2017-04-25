@@ -1,40 +1,41 @@
 ﻿namespace BikeDistributor.Core.DomainObjects
 {
-    using Contracts;
-
-    public class Bike : IInventoryItem
+    using System.Collections.Generic;
+    using Contracts.domainObjects;
+    
+    public class BikeProductInfo : IProductInfo
     {
-        public Bike()
+        public BikeProductInfo()
         {
-            
+
         }
 
-        public Bike(
+        public BikeProductInfo(
             string brand,
             string model,
             decimal price,
-            int daysInInventory,
             string discountCode
             )
         {
             this.Brand = brand;
             this.Model = model;
             this.Price = price;
-            this.DaysInInventory = daysInInventory;
             this.DiscountCode = discountCode;
         }
 
         public string Id { get; set; }
 
-        public int DaysInInventory { get; set; }
-
         public string DiscountCode { get; set; }
 
-        public string Brand { get; private set; }
+        public decimal ManualDiscount { get; set; }
 
-        public string Model { get; private set; }
+        public string Brand { get; set; }
+
+        public string Model { get; set; }
 
         public decimal Price { get; set; }
+
+        public ICollection<IDiscountItem> DiscountItems { get; set; }
 
     }
 }

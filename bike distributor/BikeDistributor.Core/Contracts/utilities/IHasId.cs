@@ -1,4 +1,4 @@
-namespace BikeDistributor.Core.Contracts
+namespace BikeDistributor.Core.Contracts.utilities
 {
     /// <summary>
     /// i have me an id...

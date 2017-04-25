@@ -2,33 +2,34 @@ namespace BikeDistributor.Core.Functions
 {
     using System;
     using System.Text;
-    using Contracts;
     using Enums;
+    using Contracts.domainObjects;
+    using Contracts.functions;
 
-    public class PlainStringOrderReceiptGenerator : IReceiptGenerator
+    public class PlainStringOrderReceiptManager : IReceiptManager
     {
         public ReceiptFunctionality Name { get; set; } = ReceiptFunctionality.OrderReceiptInStringFormat;
 
         public dynamic GetReciept(object document)
         {
-            var ord = (IOrder)document;
+            var ord = (ISalesOrder)document;
 
             var result = new StringBuilder($"PLAIN STRING Order Receipt for " +
-                                           $"{ord.CustomerSalesInfo.CustomerName}{Environment.NewLine}");
+                                           $"{ord.CustomerInfo.CustomerName}{Environment.NewLine}");
 
             foreach (var line in ord.LineItems)
             {
                 result.AppendLine(
-                    $"{line.Quantity} bikes of brand " +
-                    $"{line.InventoryItem.Brand} at " +
-                    $"{line.DiscountCoefficient * 100} % disc at " +
-                    $"{line.InventoryItem.Price} each  = a pre-tax total of " +
+                    $"{line.Quantity} products of brand " +
+                    $"{line.ProductInfoItem.Brand} at " +
+                    $"{line.GetTotalDiscount() * 100} % line level disc at " +
+                    $"{line.ProductInfoItem.Price} each  = a pre-tax total of " +
                     $"{line.Total.ToString("C")}");
             }
 
             result.AppendLine($"Sub Total: {ord.Subtotal.ToString("C")}");
 
-            result.AppendLine($"Additional discount at {ord.DiscountCoefficient * 100} pct : " +
+            result.AppendLine($"Additional order level discount at {ord.GetTotalDiscount() * 100} pct : " +
                               $"{(-ord.DiscountAmount).ToString("C")}");
 
             result.AppendLine($"Sub Total Net Discount: {ord.SubTotalNetDiscount.ToString("C")}");
