@@ -30,48 +30,6 @@ namespace BikeDistributor.Core.Functions
         private readonly Func<string, IEnumerable<IReceiptManager>> _receiptGeneratorFactory;
         private readonly IEnumerable<IDiscountScanner> _discountScanners;
 
-        //public ISalesOrder CalcualteOrder(ISalesOrder incomingOrder)
-        //{
-        //    incomingOrder.Subtotal = 0;
-
-        //    // lines
-        //    foreach (var line in incomingOrder.LineItems)
-        //    {
-        //        line.TotalBeforeDiscount = line.ProductInfoItem.Price * line.Quantity;
-
-        //        line.DiscountCoefficient = this._discountProvider
-        //            .ScanLineItem(line);
-
-        //        line.DiscountAmount =
-        //            line.TotalBeforeDiscount * line.DiscountCoefficient;
-
-        //        line.Total = line.TotalBeforeDiscount - line.DiscountAmount;
-
-        //        incomingOrder.Subtotal += line.Total;
-        //    }
-
-        //    //rest
-        //    incomingOrder.DiscountCoefficient =
-        //        this._discountProvider.ScanOrder(incomingOrder) +
-        //        incomingOrder.ManualDiscountCoefficient;
-
-        //    incomingOrder.DiscountAmount =
-        //        incomingOrder.DiscountCoefficient * incomingOrder.Subtotal;
-
-        //    incomingOrder.SubTotalNetDiscount =
-        //        incomingOrder.Subtotal - incomingOrder.DiscountAmount;
-
-        //    incomingOrder.TaxCoefficient = this._taxRate;
-
-        //    incomingOrder.TaxAmount =
-        //        incomingOrder.SubTotalNetDiscount * this._taxRate;
-
-        //    incomingOrder.Total =
-        //        incomingOrder.SubTotalNetDiscount + incomingOrder.TaxAmount;
-
-        //    return incomingOrder;
-        //}
-
         public ISalesOrder CalcualteOrder(ISalesOrder incomingOrder)
         {
             incomingOrder.Subtotal = 0;
