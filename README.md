@@ -28,13 +28,17 @@ Order calculation now accommodates the dynamic, varying nature of a-f above.
 **2.2 Dynamic discount detection**
 The original domain model composition has been abstracted and extended as follows:
 
-        a.  An **ISalesOrder** type encapsulates (_has,_ contains) a collection of **ILineItem** types.
+        a.  An ISalesOrder type encapsulates (_has,_ contains) a collection of ILineItem types.
 
-        b.  Each **ILineItem** type _has_ a **IProductInfo** type and additional properties describing the sales transaction (price, quantity, discount amount, line sales total etc.);
+        b.  Each ILineItem type _has_ a IProductInfo type and additional properties describing 
+        the sales transaction (price, quantity, discount amount, line sales total etc.);
 
-        c.  Each product **IProductInfo** type contains properties describing the product (name, brand, model, product discount codes, etc.);
+        c.  Each product **IProductInfo** type contains properties describing the product 
+        (name, brand, model, product discount codes, etc.);
 
-          d.  At the &quot;aggregate&quot; (i.e. non-line item level), a sales order can also contain a variety of other &quot;data&quot; points such as information about the customer, order dates, sub totals, tax rates, information about shipping / delivery etc.
+        d.  At the &quot;aggregate&quot; (i.e. non-line item level), a sales order can also contain
+        a variety of other &quot;data&quot; points such as information about the customer, order 
+        dates, sub totals, tax rates, information about shipping / delivery etc.
 
 The reality of the sales process is such that discounts are advertised / displayed at the point of sale level (pre-sales order completion).  Discount issuance is a business policy driven event subject to a variety of factors which may compel sellers to introduce ever changing discount mechanisms in order to compete and &quot;move&quot; inventory.
 
@@ -47,7 +51,7 @@ Because discounts are material to order calculation, at order calculation time, 
 **2.3 Post-sale transaction order handling:**
 The creation of a receipt is typically subject to a variety of drivers (business policy, point of sale customer requirements, etc.).  At present, receipt generation and delivery has been handled in a polymorphic manner as named implementers of the **IReceiptManager** GetReciept() function are allowed to behave in a varying manner and injected dynamically based on the specific functionality desired by their caller.  This varying behavior can include formatting (string v html), form of submittal (e-mail v. sms) etc. and further offers handling ability for any business object part of the sales transaction that may need to be handled post-sale.
 
-**3.  For further consideration:**
+**3. For further consideration:**
 Due to the test nature of the solution, the above functionality may not have been addressed optimally:  In a real-world scenario, a variety of business process requirements specific to industry / individual client must be obtained.  This solution is merely a demonstration of process analysis within the context of a programmatic (architectural) solution to a specific business problem with general design-time requirements.
 
 Thank you for looking!
