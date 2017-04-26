@@ -33,11 +33,11 @@ The original domain model composition has been abstracted and extended as follow
         b.  Each ILineItem type _has_ a IProductInfo type and additional properties describing 
         the sales transaction (price, quantity, discount amount, line sales total etc.);
 
-        c.  Each product **IProductInfo** type contains properties describing the product 
+        c.  Each product IProductInfo type contains properties describing the product 
         (name, brand, model, product discount codes, etc.);
 
-        d.  At the &quot;aggregate&quot; (i.e. non-line item level), a sales order can also contain
-        a variety of other &quot;data&quot; points such as information about the customer, order 
+        d.  At the aggregate (i.e. non-line item level), a sales order can also contain
+        a variety of other data points such as information about the customer, order 
         dates, sub totals, tax rates, information about shipping / delivery etc.
 
 The reality of the sales process is such that discounts are advertised / displayed at the point of sale level (pre-sales order completion).  Discount issuance is a business policy driven event subject to a variety of factors which may compel sellers to introduce ever changing discount mechanisms in order to compete and &quot;move&quot; inventory.
