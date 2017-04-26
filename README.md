@@ -1,15 +1,15 @@
 # BikeDistributorConsoleApp
 Sample project 
 
-**        1. Introduction**
+**1. Introduction**
 This is an example of solution refactoring.  The original solution contained three classes (Order, Line, Bike) used by a bicycle distributor to produce order receipts.
 
-**        2. Refactoring**
+**2. Refactoring**
 As refactored, the solution has been enabled to process sales orders for any product item (not just bikes) in a manner such that it can accommodate ever-changing business requirements with regard to both discount issuance post-sale transaction order handling (e.g. receipting).
 
 Programmatically, this has been addressed via the application of certain OOP principles (abstraction, encapsulation, the introduction of certain polymorphic behavior) along with dependency injection over a layered architecture.
 
-**                2.1 Dynamic order calculation**
+**2.1 Dynamic order calculation**
 By nature of business, the calculation of a sales order is derivative of the following variables:
 
         a.  number of line items;
@@ -22,9 +22,10 @@ By nature of business, the calculation of a sales order is derivative of the fol
 
         f.  tax rate;
 
+
 Order calculation now accommodates the dynamic, varying nature of a-f above.
 
-**                2.2 Dynamic discount detection**
+**2.2 Dynamic discount detection**
 The original domain model composition has been abstracted and extended as follows:
 
         a.  An **ISalesOrder** type encapsulates (_has,_ contains) a collection of **ILineItem** types.
@@ -43,10 +44,10 @@ At order computation time, a **IOrderManager** type is charged with order proces
 
 Because discounts are material to order calculation, at order calculation time, a collection of **IDiscountScanner** types are injected into the **IOrderManager** type.   **IDscountScanner** implementers encapsulate varying discount issuance logic based on business policy.  As such, they are responsible for &quot;scanning&quot; each sales order at the appropriate levels (both the line item and the aggregate level) and initializing each level with the appropriate discount coefficients.  This allows order calculation to occur in a manner that it can accommodate the ever-changing needs to issue discounts based on any business requirement.
 
-**                2.3 Post-sale transaction order handling:**
+**2.3 Post-sale transaction order handling:**
 The creation of a receipt is typically subject to a variety of drivers (business policy, point of sale customer requirements, etc.).  At present, receipt generation and delivery has been handled in a polymorphic manner as named implementers of the **IReceiptManager** GetReciept() function are allowed to behave in a varying manner and injected dynamically based on the specific functionality desired by their caller.  This varying behavior can include formatting (string v html), form of submittal (e-mail v. sms) etc. and further offers handling ability for any business object part of the sales transaction that may need to be handled post-sale.
 
-**        3.  For further consideration:**
+**3.  For further consideration:**
 Due to the test nature of the solution, the above functionality may not have been addressed optimally:  In a real-world scenario, a variety of business process requirements specific to industry / individual client must be obtained.  This solution is merely a demonstration of process analysis within the context of a programmatic (architectural) solution to a specific business problem with general design-time requirements.
 
 Thank you for looking!
