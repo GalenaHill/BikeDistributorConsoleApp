@@ -9,7 +9,7 @@ namespace BikeDistributor.Core.Functions
     // repetativo, but this would be a different implementation in real life
     public class SomeOtherFormatOrderReceiptManager : IReceiptManager
     {
-        public ReceiptFunctionality Name { get; set; } = ReceiptFunctionality.OrderReceiptInSomeOtherFormat;
+        public OrderPostSaleFunctionality Name { get; set; } = OrderPostSaleFunctionality.OrderReceiptInSomeOtherFormat;
 
         public dynamic GetReciept(object document)
         {

@@ -1,6 +1,6 @@
 ﻿namespace BikeDistributor.Core.Enums
 {
-    public enum ReceiptFunctionality
+    public enum OrderPostSaleFunctionality
     {
         //
         OrderReceiptInStringFormat = 0,

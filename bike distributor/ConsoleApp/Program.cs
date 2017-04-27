@@ -55,7 +55,7 @@
             Console.WriteLine(
                 orderManager.HandleOrderPostSale(
                     orderManager.CalcualteOrder(order), 
-                    ReceiptFunctionality.OrderReceiptInStringFormat));
+                    OrderPostSaleFunctionality.OrderReceiptInStringFormat));
         }
 
         private static IContainer _createContainer()

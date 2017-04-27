@@ -80,12 +80,12 @@ namespace BikeDistributor.Core.Functions
 
         public dynamic HandleOrderPostSale(
             ISalesOrder calculatedOrder, 
-            ReceiptFunctionality receiptFunctionality)
+            OrderPostSaleFunctionality orderPostSaleFunctionality)
         {
             var generator =
                 this._receiptGeneratorFactory(
-                    Enum.GetName(typeof(ReceiptFunctionality), receiptFunctionality))
-                    .FirstOrDefault(x => x.Name == receiptFunctionality);
+                    Enum.GetName(typeof(OrderPostSaleFunctionality), orderPostSaleFunctionality))
+                    .FirstOrDefault(x => x.Name == orderPostSaleFunctionality);
 
             if (generator == null)
             {

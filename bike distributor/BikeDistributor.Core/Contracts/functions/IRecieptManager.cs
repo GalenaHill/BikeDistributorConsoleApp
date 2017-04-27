@@ -7,7 +7,7 @@ namespace BikeDistributor.Core.Contracts.functions
     /// </summary>
     public interface IReceiptManager
     {
-        ReceiptFunctionality Name { get; set; }
+        OrderPostSaleFunctionality Name { get; set; }
         dynamic GetReciept(object incomingDocument);
     }
 }

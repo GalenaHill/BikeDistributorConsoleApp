@@ -2,7 +2,7 @@
 Sample project 
 
 **1. Introduction**  
-This is an example of solution refactoring.  The original solution contained three classes (Order, Line, Bike) used by a bicycle distributor to process sales orders specific to bycicles and 
+This is an example of solution refactoring.  The original solution contained three classes (Order, Line, Bike) used by a bicycle distributor to process  sales orders (calculate, issue receipts) specific to bycicles.  This processing also included (a) order calculation based on severly restricted discount detection / calcualtion logic and (b), order post-sale hadnling limited to the issuance of receipts in either a string or html format.   
 
 **2. Refactoring**  
 As refactored, the solution has been enabled to process sales orders for any product (not just bikes) in a manner such that it can accommodate changes in business requirements with regard to both discount issuance and post-sale transaction order handling (e.g. receipting).

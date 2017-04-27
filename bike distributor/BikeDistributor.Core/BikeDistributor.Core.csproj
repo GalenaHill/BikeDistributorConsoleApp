@@ -69,7 +69,7 @@
     <Compile Include="Contracts\utilities\IAssembliesProvider.cs" />
     <Compile Include="ExtensionMethods\AppSettingsExtensions.cs" />
     <Compile Include="ExtensionMethods\DecimalExtensions.cs" />
-    <Compile Include="Enums\ReceiptFunctionalityEnum.cs" />
+    <Compile Include="Enums\OrderPostSaleFunctionalityEnum.cs" />
     <Compile Include="ExtensionMethods\ContainerBuilderExtensions.cs" />
     <Compile Include="ServiceRegistration.cs" />
     <Compile Include="DomainObjects\BikeProductInfo.cs" />

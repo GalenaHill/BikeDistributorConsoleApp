@@ -36,8 +36,8 @@
                 .AssignableTo<IReceiptManager>()
                 .AsSelf()
                 .Named<IReceiptManager>(
-                Enum.GetName(typeof(ReceiptFunctionality), 
-                        ReceiptFunctionality.OrderReceiptInStringFormat))
+                Enum.GetName(typeof(OrderPostSaleFunctionality), 
+                        OrderPostSaleFunctionality.OrderReceiptInStringFormat))
                 .AsImplementedInterfaces();
 
             //  mock other type receipt builder
@@ -49,8 +49,8 @@
                 .AsSelf()
                 .Named<IReceiptManager>(
                 Enum.GetName(
-                        typeof(ReceiptFunctionality), 
-                        ReceiptFunctionality.OrderReceiptInSomeOtherFormat))
+                        typeof(OrderPostSaleFunctionality), 
+                        OrderPostSaleFunctionality.OrderReceiptInSomeOtherFormat))
                 .AsImplementedInterfaces();
 
             // builder factory

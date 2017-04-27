@@ -8,7 +8,7 @@ namespace BikeDistributor.Core.Functions
 
     public class PlainStringOrderReceiptManager : IReceiptManager
     {
-        public ReceiptFunctionality Name { get; set; } = ReceiptFunctionality.OrderReceiptInStringFormat;
+        public OrderPostSaleFunctionality Name { get; set; } = OrderPostSaleFunctionality.OrderReceiptInStringFormat;
 
         public dynamic GetReciept(object document)
         {
