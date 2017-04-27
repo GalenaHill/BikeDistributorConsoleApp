@@ -53,7 +53,7 @@
             var orderManager = container.Resolve<OrderManager>();
 
             Console.WriteLine(
-                orderManager.GetReceipt(
+                orderManager.HandleOrderPostSale(
                     orderManager.CalcualteOrder(order), 
                     ReceiptFunctionality.OrderReceiptInStringFormat));
         }

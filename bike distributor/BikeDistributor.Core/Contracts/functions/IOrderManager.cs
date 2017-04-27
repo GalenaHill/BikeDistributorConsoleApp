@@ -10,6 +10,6 @@ namespace BikeDistributor.Core.Contracts.functions
     public interface IOrderManager
     {
         ISalesOrder CalcualteOrder(ISalesOrder incomingOrder);
-        dynamic GetReceipt(ISalesOrder calculatedOrder, ReceiptFunctionality receiptFunctionality);
+        dynamic HandleOrderPostSale(ISalesOrder calculatedOrder, ReceiptFunctionality receiptFunctionality);
     }
 }

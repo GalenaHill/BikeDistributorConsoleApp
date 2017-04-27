@@ -2,10 +2,10 @@
 Sample project 
 
 **1. Introduction**  
-This is an example of solution refactoring.  The original solution contained three classes (Order, Line, Bike) used by a bicycle distributor to produce order receipts.
+This is an example of solution refactoring.  The original solution contained three classes (Order, Line, Bike) used by a bicycle distributor to process sales orders specific to bycicles and 
 
 **2. Refactoring**  
-As refactored, the solution has been enabled to process sales orders for any product item (not just bikes) in a manner such that it can accommodate ever-changing business requirements with regard to both discount issuance post-sale transaction order handling (e.g. receipting).
+As refactored, the solution has been enabled to process sales orders for any product (not just bikes) in a manner such that it can accommodate changes in business requirements with regard to both discount issuance and post-sale transaction order handling (e.g. receipting).
 
 Programmatically, this has been addressed via the application of certain OOP principles (abstraction, encapsulation, the introduction of certain polymorphic behavior) along with dependency injection over a layered architecture.
 
@@ -28,28 +28,28 @@ Order calculation now accommodates the dynamic, varying nature of a-f above.
 **2.2 Dynamic discount detection**  
 The original domain model composition has been abstracted and extended as follows:
 
-        a.  An ISalesOrder type encapsulates (_has,_ contains) a collection of ILineItem types.
+        a.  An ISalesOrder type encapsulates (has, contains) a collection of ILineItem types.
 
-        b.  Each ILineItem type _has_ a IProductInfo type and additional properties describing 
+        b.  Each ILineItem type has a IProductInfo type and additional properties describing 
         the sales transaction (price, quantity, discount amount, line sales total etc.);
 
         c.  Each product IProductInfo type contains properties describing the product 
         (name, brand, model, product discount codes, etc.);
 
-        d.  At the aggregate (i.e. non-line item level), a sales order can also contain
+        d.  At the aggregate (i.e. non-line item level), the ISalesOrder type can also contain
         a variety of other data points such as information about the customer, order 
         dates, sub totals, tax rates, information about shipping / delivery etc.
 
-The reality of the sales process is such that discounts are advertised / displayed at the point of sale level (pre-sales order completion).  Discount issuance is a business policy driven event subject to a variety of factors which may compel sellers to introduce ever changing discount mechanisms in order to compete and &quot;move&quot; inventory.
+The reality of the sales process is such that discounts are advertised / displayed at the point of sale level (pre-sales order completion).  Discount issuance is a business policy driven event. It is subject to a variety of factors which may compel sellers to introduce ever changing discount mechanisms in order to compete and &quot;move&quot; inventory.
 
-The solution has been enabled to handle an unlimited amount of such factors vis-à-vis the ability to &quot;attach&quot; and detect discounts associated with any attribute of either the product, the line item or the sales order itself.
+The solution has been enabled to handle an unrestricted amount of such factors vis-à-vis the ability to detect issued discounts associated with any attribute of either the product, the line item or the sales order itself.
 
-At order computation time, a **IOrderManager** type is charged with order processing.  This includes (a) order calculation and (b) order and post-sale order handling which may include any sort of behavior such as receipting, printing, emailing, etc.
+At order computation time, an **IOrderManager** type is charged with order processing.  This includes (a) order calculation and (b) order and post-sale order handling which may include any sort of behavior such as receipting, printing, emailing, etc.
 
 Because discounts are material to order calculation, at order calculation time, a collection of **IDiscountScanner** types are injected into the **IOrderManager** type.   **IDscountScanner** implementers encapsulate varying discount issuance logic based on business policy.  As such, they are responsible for &quot;scanning&quot; each sales order at the appropriate levels (both the line item and the aggregate level) and initializing each level with the appropriate discount coefficients.  This allows order calculation to occur in a manner that it can accommodate the ever-changing needs to issue discounts based on any business requirement.
 
 **2.3 Post-sale transaction order handling:**  
-The creation of a receipt is typically subject to a variety of drivers (business policy, point of sale customer requirements, etc.).  At present, receipt generation and delivery has been handled in a polymorphic manner as named implementers of the **IReceiptManager** GetReciept() function are allowed to behave in a varying manner and injected dynamically based on the specific functionality desired by their caller.  This varying behavior can include formatting (string v html), form of submittal (e-mail v. sms) etc. and further offers handling ability for any business object part of the sales transaction that may need to be handled post-sale.
+The creation of a receipt is typically subject to a variety of drivers (business policy, point of sale customer requirements, etc.).  At present, receipt generation and delivery has been handled in a polymorphic manner as named implementers of the **IReceiptManager** HandleOrderPostSale() function are injected and selected dynamically based on the specific post order calcualtion functionality desired by their caller. This varying behavior can include formatting (string v html), form of submittal (e-mail v. sms) etc. and further offers handling ability for any business object part of the sales transaction that may need to be handled post-sale.
 
 **3. For further consideration:**  
 Due to the test nature of the solution, the above functionality may not have been addressed optimally:  In a real-world scenario, a variety of business process requirements specific to industry / individual client must be obtained.  This solution is merely a demonstration of process analysis within the context of a programmatic (architectural) solution to a specific business problem with general design-time requirements.

@@ -78,7 +78,7 @@ namespace BikeDistributor.Core.Functions
             return incomingOrder;
         }
 
-        public dynamic GetReceipt(
+        public dynamic HandleOrderPostSale(
             ISalesOrder calculatedOrder, 
             ReceiptFunctionality receiptFunctionality)
         {
